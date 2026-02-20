@@ -34,7 +34,7 @@ public class App {
             // GUI
             Gui gui = new Gui();
             gui.start();
-            UIController ui = new UIController(gui, questionService);
+            UIController ui = new UIController();
             ui.showMainMenu();
 
         } catch (IOException e) {
