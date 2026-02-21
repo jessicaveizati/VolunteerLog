@@ -1,34 +1,49 @@
 package ui;
 
+import backend.services.UsersService;
+import backend.services.VolunteerHoursService;
 import com.googlecode.lanterna.gui2.BasicWindow;
-import ui.windows.MainMenuWindow;
-import ui.windows.AddWindow;
-import ui.windows.AllEntriesWindow;
-import ui.windows.TotalHoursWindow;
-import ui.windows.GroupByWindow;
+import ui.windows.*;
 
 public class UIController {
-    public UIController() {
+
+    Gui gui;
+    private final UsersService usersService;
+    private final VolunteerHoursService volunteerHoursService;
+
+    public UIController(Gui gui, UsersService usersService, VolunteerHoursService volunteerHoursService) {
+        this.gui = gui;
+        this.usersService = usersService;
+        this.volunteerHoursService = volunteerHoursService;
     }
+
+    public VolunteerHoursService getVolunteerHoursService() {
+        return volunteerHoursService;
+    }
+
 
     public void showMainMenu() {
-        new MainMenuWindow(this);
+        gui.show(new MainMenuWindow(this));
     }
 
-    public void showGroupByWindow() {
-        new GroupByWindow(this);
+    public void showSeeUsersWindow() {
+        gui.show(new SeeUsersWindow(this, usersService, volunteerHoursService));
+    }
+
+    public void showSeeOrganizationsWindow() {
+        gui.show(new SeeOrganizationsWindow(this));
     }
 
     public void showAddWindow() {
-        new AddWindow(this);
+        gui.show(new AddWindow(this));
     }
 
     public void showAllEntriesWindow() {
-        new AllEntriesWindow(this);
+        gui.show(new AllEntriesWindow(this));
     }
 
     public void showTotalHoursWindow() {
-        new TotalHoursWindow(this);
+        gui.show(new TotalHoursWindow(this, volunteerHoursService));
     }
 
     public void closeWindow(BasicWindow window) {
@@ -39,4 +54,7 @@ public class UIController {
         System.exit(0);
     }
 
+    public void showWindow(BasicWindow window) {
+        gui.show(window);
+    }
 }

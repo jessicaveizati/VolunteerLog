@@ -1,8 +1,9 @@
 package ui.windows;
 
+import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.gui2.*;
 import ui.UIController;
-import ui.windows.GroupByWindow;
+import ui.windows.SeeUsersWindow;
 import ui.windows.AddWindow;
 import ui.windows.AllEntriesWindow;
 import ui.windows.TotalHoursWindow;
@@ -24,6 +25,9 @@ public class MainMenuWindow extends BasicWindow{
         //Centers the window
         setHints(List.of(Hint.CENTERED));
 
+        //Sets the size of the window
+        setFixedSize(new TerminalSize(80, 20));
+
         //Build
         setComponent(build());
 
@@ -41,18 +45,18 @@ public class MainMenuWindow extends BasicWindow{
                 new LinearLayout(Direction.VERTICAL)
         );
 
-        panel.addComponent(new Label("Hello"));
-//        MenuItem[] menu = {
-//                new MenuItem("1) Group By", ui::showGroupByWindow),
-//                new MenuItem("2) Add Entry", ui::showAddWindow),
-//                new MenuItem("3_ View All Volunteer Entries", ui:: showAllEntriesWindow),
-//                new MenuItem("4) See Total Hours", ui::showTotalHoursWindow),
-//                new MenuItem("Exit", ui::closeApp)
-//        };
-//
-//        for(MenuItem item : menu) {
-//            panel.addComponent(new Button(item.name(),item.action()));
-//        }
+        MenuItem[] menu = {
+                new MenuItem("1) See Users", ui::showSeeUsersWindow),
+                new MenuItem("2) See Organizations", ui::showSeeOrganizationsWindow),
+                new MenuItem("3) Add Entry", ui::showAddWindow),
+                new MenuItem("4) View All Volunteer Entries", ui:: showAllEntriesWindow),
+                new MenuItem("5) See Total Hours", ui::showTotalHoursWindow),
+                new MenuItem("6) Exit", ui::closeApp)
+        };
+
+        for(MenuItem item : menu) {
+            panel.addComponent(new Button(item.name(),item.action()));
+        }
 
         return panel;
     }
