@@ -1,24 +1,23 @@
-CREATE TABLE question (
-	id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-	question_text TEXT NOT NULL
+CREATE TABLE Organizations (
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    organization_name TEXT,
+    location_address TEXT,
+    location_number INTEGER
 );
 
-CREATE TABLE answer_option (
-	id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-	option_text TEXT NOT NULL,
-	is_answer INTEGER NOT NULL CHECK (is_answer IN (0, 1)) DEFAULT 0,
-	question_id INTEGER NOT NULL
+CREATE TABLE Users (
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    name TEXT,
+    email TEXT,
+    graduation_year INTEGER
 );
 
-CREATE TABLE question_tag (
-	id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-	name TEXT NOT NULL UNIQUE
-);
-
-CREATE TABLE question_question_tag (
-	question_id INTEGER NOT NULL,
-	question_tag_id INTEGER NOT NULL,
-	PRIMARY KEY (question_id, question_tag_id),
-	CONSTRAINT question_question_tag_question_FK FOREIGN KEY (question_id) REFERENCES question(id),
-	CONSTRAINT question_question_tag_question_tag_FK FOREIGN KEY (question_tag_id) REFERENCES question_tag(id)
+CREATE TABLE volunteer_hours (
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER,
+    organization_id INTEGER,
+    date TEXT,
+    hours INTEGER,
+    CONSTRAINT volunteer_hours_Organizations_FK FOREIGN KEY (organization_id) REFERENCES Organizations(id),
+    CONSTRAINT volunteer_hours_Users_FK FOREIGN KEY (user_id) REFERENCES Users(id)
 );
