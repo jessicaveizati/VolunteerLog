@@ -48,14 +48,14 @@ public class AddWindow extends BasicWindow {
             ui.showWindow(addUserWindow);
         }));
 
-        // Adds a new organization
+        //Adds a new organization
         panel.addComponent(new Button("Add Organization", () -> {
             AddOrganizationsWindow addOrgWindow =
                     new AddOrganizationsWindow(ui, organizationsService);
             ui.showWindow(addOrgWindow);
         }));
 
-        // Adds a new volunteer entry
+        //Adds a new volunteer entry
         panel.addComponent(new Button("Add Volunteer Entry", () -> {
             AddVolunteerHoursWindow addHoursWindow =
                     new AddVolunteerHoursWindow(ui, volunteerHoursService);

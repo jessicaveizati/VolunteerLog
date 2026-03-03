@@ -42,17 +42,17 @@ public class AddUsersWindow extends BasicWindow {
         TextBox nameBox = new TextBox();
         panel.addComponent(nameBox);
 
-        // Email input
+        //Email input
         panel.addComponent(new Label("Email:"));
         TextBox emailBox = new TextBox();
         panel.addComponent(emailBox);
 
-        // Graduation Year input
+        //Graduation Year input
         panel.addComponent(new Label("Graduation Year:"));
         TextBox gradYearBox = new TextBox();
         panel.addComponent(gradYearBox);
 
-        // Submit button
+        //Submit button
         panel.addComponent(new Button("Submit", () -> {
             try {
                 String name = nameBox.getText();
@@ -62,7 +62,7 @@ public class AddUsersWindow extends BasicWindow {
                 //Add user to database
                 usersService.addUser(name, email, gradYear);
 
-                // Clear fields
+                //Clear fields
                 nameBox.setText("");
                 emailBox.setText("");
                 gradYearBox.setText("");
@@ -72,7 +72,7 @@ public class AddUsersWindow extends BasicWindow {
             }
         }));
 
-        // Back button
+        //Back button
         panel.addComponent(new Button("Back", ui::showAddWindow));
 
         return panel;
