@@ -1,5 +1,6 @@
 package ui;
 
+import backend.services.OrganizationsService;
 import backend.services.UsersService;
 import backend.services.VolunteerHoursService;
 import com.googlecode.lanterna.gui2.BasicWindow;
@@ -9,18 +10,19 @@ public class UIController {
 
     Gui gui;
     private final UsersService usersService;
+    private final OrganizationsService organizationsService;
     private final VolunteerHoursService volunteerHoursService;
 
-    public UIController(Gui gui, UsersService usersService, VolunteerHoursService volunteerHoursService) {
+    public UIController(Gui gui, UsersService usersService, OrganizationsService organizationsService, VolunteerHoursService volunteerHoursService) {
         this.gui = gui;
         this.usersService = usersService;
+        this.organizationsService = organizationsService;
         this.volunteerHoursService = volunteerHoursService;
     }
 
     public VolunteerHoursService getVolunteerHoursService() {
         return volunteerHoursService;
     }
-
 
     public void showMainMenu() {
         gui.show(new MainMenuWindow(this));
@@ -35,7 +37,7 @@ public class UIController {
     }
 
     public void showAddWindow() {
-        gui.show(new AddWindow(this));
+        gui.show(new AddWindow(this, usersService, organizationsService, volunteerHoursService));
     }
 
     public void showAllEntriesWindow() {

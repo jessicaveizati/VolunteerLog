@@ -1,7 +1,9 @@
 import backend.Database;
+import backend.repositories.OrganizationsRepo;
 import backend.repositories.QuestionRepo;
 import backend.repositories.UsersRepo;
 import backend.repositories.VolunteerHoursRepo;
+import backend.services.OrganizationsService;
 import backend.services.QuestionService;
 import backend.services.UsersService;
 import backend.services.VolunteerHoursService;
@@ -32,17 +34,19 @@ public class App {
             // Repositories
             QuestionRepo questionRepo = new QuestionRepo(conn);
             UsersRepo usersRepo = new UsersRepo(conn);
+            OrganizationsRepo organizationsRepo = new OrganizationsRepo(conn);
             VolunteerHoursRepo hoursRepo = new VolunteerHoursRepo(conn);
 
             // Services
             QuestionService questionService = new QuestionService(questionRepo);
             UsersService usersService = new UsersService(usersRepo);
+            OrganizationsService organizationsService = new OrganizationsService(organizationsRepo);
             VolunteerHoursService hoursService = new VolunteerHoursService(hoursRepo);
 
             // GUI
             Gui gui = new Gui();
             gui.start();
-            UIController ui = new UIController(gui, usersService, hoursService);
+            UIController ui = new UIController(gui, usersService, organizationsService, hoursService);
             ui.showMainMenu();
 
         } catch (IOException e) {

@@ -30,4 +30,17 @@ public class UsersRepo {
         return usersList;
 
     }
+
+    //Add a new user
+    public void addUser(String name, String email, int graduationYear){
+        String sql = "INSERT INTO Users (name, email, graduation_year) VALUES (?, ?, ?)";
+        try (PreparedStatement statement = conn.prepareStatement(sql)) {
+            statement.setString(1, name);
+            statement.setString(2, email);
+            statement.setInt(3, graduationYear);
+            int affectedRows = statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException("Error adding the user to DB :(", e);
+        }
+    }
 }
